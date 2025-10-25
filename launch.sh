@@ -13,7 +13,7 @@ PB_PID=$!
 
 # Start Astro dev server
 echo "🌌 Starting Astro dev server..."
-cd ../astrocrm/astro-crm
+cd ../svastro/astro-crm
 npm run dev &
 
 # Capture Astro PID

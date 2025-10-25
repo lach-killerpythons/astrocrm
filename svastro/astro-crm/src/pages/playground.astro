@@ -1,0 +1,50 @@
+---
+
+import Sbutton from "../svelte/components/Sbutton.svelte"
+import NewContact from "../svelte/components/NewContact.svelte"
+import Tapa from "../svelte/components/Tapa.svelte"
+import Test1 from "../svelte/components/Test1.svelte"
+
+import Layout from "../layout/Layout.astro";
+
+import NotePad from "../svelte/components/NotePad.svelte"
+import type { content } from "../../tailwind.config.cjs";
+
+export const layout = Layout
+
+let bs_content = `<h1>this is some BS 💁👌🎍😍</h1>`
+const t = "💁👌🎍😍"
+
+
+console.log(t)
+---
+
+<!-- 
+make reactive -->
+
+<head>
+    <meta charset="UTF-8" />
+    <title>playground</title>
+</head>
+
+<div>
+<!-- <div class="relative min-h-screen bg-[url('/protruding-squares.svg')] bg-repeat bg-center"> -->
+    <button class="bg-blue-600 text-white px-4 py-2 rounded"><a href="/">Home</a></button>
+    <Test1 MyText={JSON.stringify(t)} client:only="svelte"/>
+
+    <Sbutton client:load/> <!-- or client:visible / client:idle -->
+    <NewContact client:load/> <!-- or client:visible / client:idle -->
+
+    <div class="max-w-3xl mx-auto p-6 bg-gray-900 text-gray-100 rounded-xl shadow-lg">
+        <h1 class="text-3xl font-bold mb-4">Welcome to Babylon</h1>
+        <p class="text-gray-400 leading-relaxed">
+            Build your next idea with speed and precision.
+        </p>
+    </div>
+    <!-- <WebsiteList/> -->
+     <!-- <Tapa client:load myContent={bs_content}/> -->
+     <Tapa client:load myContent={bs_content}/>
+
+    <!-- <NotePad client:load/> -->
+</div>
+

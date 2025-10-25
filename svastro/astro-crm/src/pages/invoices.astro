@@ -1,0 +1,18 @@
+---
+import InvoiceList from "../svelte/components/InvoiceList.svelte"
+import Layout from "../layout/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+export const layout = Layout;
+---
+
+<head>
+    <title>INVOICES</title>
+</head>
+
+
+<div>
+    <Navbar/>
+    <main class="ml-[10vw] min-w-[80px] max-w-[2000px] p-4">
+        <InvoiceList client:only/>
+    </main>
+</div>

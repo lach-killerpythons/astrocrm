@@ -1,0 +1,45 @@
+---
+import FruityButton from "../FruityButton.astro";
+import StatusButton from "../buttons/StatusButton.astro";
+import { pb } from "../../lib/pb"
+const target_collection = 'website'
+const records = await pb.collection(target_collection).getFullList(200, {
+  sort: '-created',
+});
+
+// svelte comps
+import Tapa from "../../svelte/components/Tapa.svelte"
+
+
+import Profile from "../contacts/Profile.astro";
+
+
+---
+<!-- TO DO: domain registration, renewal date, reccuring cost (estimate) -->
+
+
+  
+  <div class="max-w-3xl mx-auto p-6 bg-gray-900 text-gray-100 rounded-xl shadow-lg">
+  <p class="text-gray-400 leading-relaxed">
+    <ul>
+      {records.map(site => (
+        <h1 class="text-3xl font-bold mb-4"><a href={site.domain} target="_blank">{site.domain}</a></h1>
+        <StatusButton href="" status={site.status}/><br/>
+
+        <a href={site.repo_url} target="_blank" class="text-blue-500 hover:text-blue-700 underline">{site.repo_url}</a><br/>
+        <li class="mb-2 border-b pb-2">
+          <strong>{site.name}</strong><br/>
+
+          <Profile personId ={site.contacts}/>
+          
+          {/* <article class="prose" set:html={site.Notes}></article> */}
+
+          <Tapa client:only myContent={site.Notes} myId={site.id}/>
+
+
+          <span class="text-sm text-gray-500">{site.status}</span>
+        </li>
+      ))}
+    </ul>
+  </p>
+</div>

@@ -1,0 +1,22 @@
+---
+import Navbar from "../components/Navbar.astro";
+import Layout from "../layout/Layout.astro";
+import DynamicCollectionWrap from "../svelte/wrappers/DynamicCollectionWrap.svelte"
+import SelectFruits from "../svelte/components/SelectFruits.svelte"
+import { selectedCollection } from "../lib/stores"
+const layout = Layout
+---
+<head slot="head">
+  <title>AstroCRMssssss</title>
+</head>
+
+<div class="p-6">
+    <Navbar />
+    <main class="ml-[10vw] min-w-[80px] max-w-[2000px] p-4">
+      
+
+      <h1 class="text-3xl font-bold mb-4">AstroCRMssssss</h1>
+      <SelectFruits client:only/>
+      <DynamicCollectionWrap client:only/>
+    </main>
+</div>

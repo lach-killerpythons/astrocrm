@@ -1,0 +1,31 @@
+---
+interface ButtonProps {
+  href?: string;
+  status?: string; // string because we want to allow unknown flavors, fallback handled
+}
+
+// Destructure props with defaults
+const { href = "/", status = "live" } =
+  Astro.props as ButtonProps;
+
+// Define all the flavors with Tailwind classes
+const flavorMap = {
+  development: "bg-yellow-400 hover:bg-yellow-500 text-black", // in dev = bannana
+  archived: "bg-red-600 hover:bg-red-700 text-white", // archived = cherry
+  live: "bg-indigo-700 hover:bg-indigo-800 text-white", // live = blackberry
+} as const;
+
+// Type-safe key type
+type Flavor = keyof typeof flavorMap;
+
+// Pick color classes or fallback
+const colorClasses =
+  (status in flavorMap ? flavorMap[status as Flavor] : "bg-gray-600 hover:bg-gray-700 text-white");
+---
+
+<a
+  href={href}
+  class={`inline-block px-4 py-2 rounded transition-colors ${colorClasses}`}
+>
+  {status}
+</a>

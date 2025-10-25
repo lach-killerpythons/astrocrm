@@ -1,0 +1,28 @@
+---
+import { pb } from "../lib/pb" 
+import BlueButton from "../components/BlueButton.astro";
+const records = await pb.collection('website').getFullList(200, {
+  sort: '-created',
+});
+export const layout = Layout;
+
+// import Layout from '../layout/Layout.astro'
+import Navbar from "../components/Navbar.astro";
+import WebsiteList from "../components/websites/WebsiteList.astro";
+import Layout from "../layout/Layout.astro";
+
+// export const layout = Layout;
+---
+---
+  <head>
+    <meta charset="UTF-8" />
+    <title>Websites</title>
+    <BlueButton href="/" label="Home"/>    
+    <Navbar/>
+  </head>
+  <WebsiteList/>
+  <!-- <body class="bg-gray-900 text-gray-100 p-8 font-sans">
+    <h1 class="text-2xl font-bold mb-4">Websites</h1>
+    <a href="/">← Back</a>
+
+  </body> -->

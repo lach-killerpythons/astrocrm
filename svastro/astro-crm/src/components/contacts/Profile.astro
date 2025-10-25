@@ -1,0 +1,51 @@
+---
+const placeholder = "04ritcvn7dfa7d8" // this is the ID of the WEBSITE
+
+const {personId = placeholder} = Astro.props
+
+
+
+import PocketBase from "pocketbase";
+import { pb as originalPb } from "../../lib/pb";
+
+export async function fetchContacts(websitePlaceholder: string) {
+  // Use the same base URL as your original pb instance
+  // Assuming your original pb is initialized like: `new PocketBase("http://127.0.0.1:8090")`
+  const pb = new PocketBase(originalPb.baseUrl ?? ""); // fallback if needed
+
+
+
+  const records = await pb.collection("contacts").getFullList(200, {
+    sort: "-created",
+    //filter: `websites.id = "${websitePlaceholder}"`,
+    filter: `id = "${websitePlaceholder}"`,
+  });
+
+  return records;
+}
+console.log(personId)
+const records = await fetchContacts(personId);
+
+---
+
+
+    {records.map(site => (
+        // <p>{site.Name}</p>
+        // <p>{site.Email}</p>
+        // <p>{site.Phone}</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Contact Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>{site.Name}</td>
+                <td>{site.Email}</td>
+                <td>{site.Phone}</td>
+            </tr>
+        </table>
+    ))}

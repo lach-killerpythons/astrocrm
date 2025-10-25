@@ -1,0 +1,29 @@
+---
+import Layout from '../layout/Layout.astro'
+import FruityButton from '../components/FruityButton.astro';
+import Navbar from '../components/Navbar.astro';
+import Emoj from "../svelte/components/Emoj.svelte"
+export const layout = Layout;
+
+---
+
+<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>AstroCRM</title>
+</head>
+<div>
+		<h1>AstroCRM</h1>
+		<Navbar/>
+		<div class="h-screen flex items-center justify-center">
+  			<div class="p-8 bg-blue-500 text-white rounded-lg">
+				<Emoj/>
+			</div>
+		</div>
+		
+
+</div>
+
+

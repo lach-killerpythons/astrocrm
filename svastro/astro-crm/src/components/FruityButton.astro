@@ -1,0 +1,43 @@
+---
+interface ButtonProps {
+  href?: string;
+  label?: string;
+  flavor?: string; // string because we want to allow unknown flavors, fallback handled
+}
+
+// Destructure props with defaults
+const { href = "/", label = "Click Me", flavor = "Blueberry" } =
+  Astro.props as ButtonProps;
+
+// Define all the flavors with Tailwind classes
+const flavorMap = {
+  Blueberry: "bg-blue-600 hover:bg-blue-700 text-white",
+  Mango: "bg-orange-500 hover:bg-orange-600 text-white",
+  Banana: "bg-yellow-400 hover:bg-yellow-500 text-black",
+  Kiwi: "bg-green-500 hover:bg-green-600 text-white",
+  Strawberry: "bg-rose-500 hover:bg-rose-600 text-white",
+  Grape: "bg-purple-600 hover:bg-purple-700 text-white",
+  Watermelon: "bg-pink-500 hover:bg-pink-600 text-white",
+  Lime: "bg-lime-500 hover:bg-lime-600 text-black",
+  Cherry: "bg-red-600 hover:bg-red-700 text-white",
+  Coconut: "bg-neutral-200 hover:bg-neutral-300 text-gray-800",
+  Plum: "bg-violet-700 hover:bg-violet-800 text-white",
+  Peach: "bg-amber-400 hover:bg-amber-500 text-white",
+  Blackberry: "bg-indigo-700 hover:bg-indigo-800 text-white",
+  Dragonfruit: "bg-fuchsia-600 hover:bg-fuchsia-700 text-white",
+} as const;
+
+// Type-safe key type
+type Flavor = keyof typeof flavorMap;
+
+// Pick color classes or fallback
+const colorClasses =
+  (flavor in flavorMap ? flavorMap[flavor as Flavor] : "bg-gray-600 hover:bg-gray-700 text-white");
+---
+
+<a
+  href={href}
+  class={`inline-block px-4 py-2 rounded transition-colors ${colorClasses}`}
+>
+  {label}
+</a>

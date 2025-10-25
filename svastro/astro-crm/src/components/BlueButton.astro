@@ -1,0 +1,13 @@
+---
+const { href = "/", label = "Home" } = Astro.props;
+---
+<!-- 
+example astro component -> takes link and label as props
+uses inline tailwind css class 
+-->
+<a
+  href={href}
+  class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
+>
+  {label}
+</a>

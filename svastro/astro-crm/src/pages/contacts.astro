@@ -1,0 +1,23 @@
+---
+import ContactList from "../svelte/components/ContactList.svelte"
+import Layout from '../layout/Layout.astro'
+import Navbar from "../components/Navbar.astro";
+export const layout = Layout;
+---
+
+<head>
+    <title>contacts</title>
+    
+</head>
+
+        
+<div>
+    <Navbar/>
+    <main class="ml-[10vw] min-w-[80px] max-w-[2000px] p-4">
+        <!-- RENDER ON THE CLIENT SIDE ONLY (not client:load)-> fixes UTF-8 hydration issue (emoji bug)  -->
+        <ContactList client:only/>  
+    </main>
+   
+    
+</div>
+

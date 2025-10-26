@@ -10,6 +10,9 @@
   import BubbleMenu from '@tiptap/extension-bubble-menu'
 
   import {UPDATE_Item} from '../../lib/crud' 
+  import EmojBox from '../wrappers/EmojBox.svelte';
+
+  let emojiKeyboard = $state(true) // have to set to $state to be reactive in 
 
   let bubbleMenu = $state()
   let element = $state()
@@ -27,6 +30,11 @@
 
   function update(newContent) {
     UPDATE_Item('website',myId, "Notes", newContent)  // (target_collection: string, id: string, field: string, newValue: any) 
+  }
+
+  function toggleEmoji() {
+    emojiKeyboard = !emojiKeyboard
+    
   }
   
 
@@ -77,6 +85,13 @@
       <button onclick={() => update(editorState.editor.getHTML())}>
         SAVE
       </button>
+      <button onclick={()=> toggleEmoji()}>
+        EMOJI
+      </button>
+      {#if emojiKeyboard}
+        <EmojBox/>
+      {/if}
+      
     </div>
   {/if}
 

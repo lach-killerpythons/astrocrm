@@ -1,7 +1,16 @@
 <script>
-  let emoji = "🤔";
+  let {emoji = "🫐"} = $props()
+  import { lastEmoji } from "../../lib/stores";
+
+  function handleClick() {
+    lastEmoji.set(emoji)
+    console.log(emoji)
+  }
 </script>
 
-<h1>Displaying Emojis</h1>
-<p>Direct in markup: 🤔</p>
-<p>From JavaScript variable: {emoji}</p>
+
+<button on:click={handleClick}>
+
+  <br>
+  {emoji}
+</button>
